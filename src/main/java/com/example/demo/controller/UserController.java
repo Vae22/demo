@@ -51,4 +51,5 @@ public class UserController {
     public List<User> ListUser() {
         return userService.selectAll();
     }
+
 }
