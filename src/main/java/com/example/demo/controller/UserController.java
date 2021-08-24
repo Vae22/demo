@@ -3,12 +3,13 @@ package com.example.demo.controller;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/testBoot")
 public class UserController {
 
     @Autowired
@@ -16,8 +17,8 @@ public class UserController {
 
 
     @RequestMapping(value = "getUser/{id}", method = RequestMethod.GET)
-    public User GetUser(@PathVariable int id) {
-        return userService.getUserInfo(id);
+    public String GetUser(@PathVariable int id) {
+        return userService.getUserInfo(id).toString();
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
@@ -31,7 +32,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@RequestBody User user) {
+    public String update(User user) {
         int result = userService.Update(user);
         if (result >= 1) {
             return "修改成功";
@@ -42,7 +43,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public User insert(@RequestBody User user) {
+    public User insert(User user) {
         return userService.save(user);
     }
 
@@ -51,5 +52,4 @@ public class UserController {
     public List<User> ListUser() {
         return userService.selectAll();
     }
-
 }
