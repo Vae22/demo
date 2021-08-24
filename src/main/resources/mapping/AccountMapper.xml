@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd"><mapper namespace="com.example.demo.mapper.AccountMapper">
+    <!-- 建立对应关系 -->
+    <resultMap type="com.example.demo.entity.Account" id="BaseResultMap">
+        <id column="aid" property="id"/>
+        <result column="uid" property="uid"/>
+        <result column="money" property="money"/>
+        <!-- 它是用于指定从表方的引用实体属性的,column为数据库表字段，property为实体类定义的属性 -->
+        <association property="user" javaType="com.example.demo.entity.User">
+            <id column="id" property="id"/>
+            <result column="user_name" property="userName"/>
+            <result column="sex" property="sex"/>
+            <result column="birth_day" property="birthDay"/>
+            <result column="address" property="address"/>
+        </association>
+    </resultMap>
+    <select id="findAll" resultMap="BaseResultMap">
+            select u.*,a.id as aid,a.uid,a.money
+            from account a,user u
+            where a.uid =u.id;
+   </select>
+</mapper>
