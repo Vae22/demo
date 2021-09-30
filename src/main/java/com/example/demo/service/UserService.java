@@ -20,4 +20,5 @@ public interface UserService {
 
     public List<User> selectAll();
 
+    public List<Integer> selectAllIds();
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -33,6 +34,19 @@ public class UserServiceImpl implements UserService {
 
     public List<User> selectAll() {
         return userMapper.selectAll();
+    }
+
+    public List<Integer> selectAllIds(){
+        List<User> UserList =  userMapper.selectAll();
+        //方法1
+//      List<Integer> userIdList = new ArrayList<>();
+//        for (User user:UserList
+//        ) {
+//            userIdList.add(user.getId());
+//        }
+//      方法2
+        List<Integer> userIdList=UserList.stream().map(User::getId).collect(Collectors.toList());
+        return userIdList;
     }
 
 }

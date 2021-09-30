@@ -3,13 +3,16 @@
 <mapper namespace="com.example.demo.mapper.UserMapper">
     <resultMap id="BaseResultMap" type="com.example.demo.entity.User">
         <result column="id" jdbcType="INTEGER" property="id" />
-        <result column="userName" jdbcType="VARCHAR" property="userName" />
-        <result column="passWord" jdbcType="VARCHAR" property="passWord" />
-        <result column="realName" jdbcType="VARCHAR" property="realName" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="birth_day" jdbcType="TIMESTAMP" property="birthDay" />
+        <result column="sex" jdbcType="VARCHAR" property="sex" />
+        <result column="address" jdbcType="VARCHAR" property="address"/>
     </resultMap>
     <!--查询用户信息-->
-    <select id="getUserInfo" resultType="com.example.demo.entity.User">
-        select * from user where id = #{id}
+    <select id="getUserInfo" resultMap="BaseResultMap">
+        select id,user_name,birth_day,sex,address
+        from user
+        where id = #{id}
     </select>
     <!--删除用户信息-->
     <delete id="deleteById" parameterType="int">
@@ -17,7 +20,7 @@
     </delete>
     <!--返回所有用户信息-->
     <select id="selectAll"  resultMap="BaseResultMap">
-        select id,userName,passWord,realName from user
+        select id,user_name,birth_day,sex,address from user
     </select>
     <!--增加用户信息-->
     <insert id="save" parameterType="com.example.demo.entity.User" >
@@ -27,13 +30,16 @@
                 id,
             </if>
             <if test="userName != null" >
-                userName,
+                user_name,
             </if>
-            <if test="passWord != null" >
-                passWord,
+            <if test="birthDay != null" >
+                birth_day,
             </if>
-            <if test="realName != null" >
-                realName,
+            <if test="sex != null" >
+                sex,
+            </if>
+            <if test="address != null">
+                address,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -43,11 +49,14 @@
             <if test="userName != null" >
                 #{userName,jdbcType=VARCHAR},
             </if>
-            <if test="passWord != null" >
-                #{passWord,jdbcType=VARCHAR},
+            <if test="birthDay != null" >
+                #{birthDay,jdbcType=TIMESTAMP},
             </if>
-            <if test="realName != null" >
-                #{realName,jdbcType=VARCHAR},
+            <if test="sex != null" >
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null" >
+                #{address,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -57,13 +66,16 @@
         update user
         <set >
             <if test="userName != null" >
-                userName = #{userName,jdbcType=VARCHAR},
+                user_name = #{userName,jdbcType=VARCHAR},
             </if>
-            <if test="passWord != null" >
-                passWord = #{passWord,jdbcType=VARCHAR},
+            <if test="birthDay != null" >
+                birth_day = #{birthDay,jdbcType=TIMESTAMP},
             </if>
-            <if test="realName != null" >
-                realName = #{realName,jdbcType=VARCHAR},
+            <if test="sex != null" >
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null" >
+                sex = #{address,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}

@@ -46,10 +46,15 @@ public class UserController {
         return userService.save(user);
     }
 
-    @RequestMapping("/selectAll")
+    @RequestMapping("/findAll")
     @ResponseBody
     public List<User> ListUser() {
         return userService.selectAll();
     }
 
+    @RequestMapping("/findAllUserIds")
+    @ResponseBody
+    public List<Integer> selectAllIds() {
+        return userService.selectAllIds();
+    }
 }
