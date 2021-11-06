@@ -9,9 +9,13 @@ spring:
     url: jdbc:mysql://localhost:3308/library?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-mybatis:
-  mapper-locations: classpath:mapping/*.xml
-  type-aliases-package: com.example.demo.entity
+mybatis-plus:
+  mapper-locations: classpath:com/example/demo/**/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.example.demo.entity
+  global-config:
+    db-config:
+      id-type: auto
 
 #showSql
 logging:

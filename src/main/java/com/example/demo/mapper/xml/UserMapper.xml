@@ -3,14 +3,20 @@
 <mapper namespace="com.example.demo.mapper.UserMapper">
     <resultMap id="BaseResultMap" type="com.example.demo.entity.User">
         <result column="id" jdbcType="INTEGER" property="id" />
-        <result column="user_name" jdbcType="VARCHAR" property="userName" />
-        <result column="birth_day" jdbcType="TIMESTAMP" property="birthDay" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
         <result column="sex" jdbcType="VARCHAR" property="sex" />
         <result column="address" jdbcType="VARCHAR" property="address"/>
+        <collection property="accounts" ofType="com.example.demo.entity.Account">
+            <id column="aid" jdbcType="INTEGER" property="id"/>
+            <result column="uid" jdbcType="INTEGER" property="uid"/>
+            <result column="money" jdbcType="DOUBLE" property="money"/>
+        </collection>
     </resultMap>
     <!--查询用户信息-->
     <select id="getUserInfo" resultMap="BaseResultMap">
-        select id,user_name,birth_day,sex,address
+        select id,username,sex,address
         from user
         where id = #{id}
     </select>
@@ -20,7 +26,7 @@
     </delete>
     <!--返回所有用户信息-->
     <select id="selectAll"  resultMap="BaseResultMap">
-        select id,user_name,birth_day,sex,address from user
+        select id,username,sex,address from user
     </select>
     <!--增加用户信息-->
     <insert id="save" parameterType="com.example.demo.entity.User" >
@@ -29,11 +35,8 @@
             <if test="id != null" >
                 id,
             </if>
-            <if test="userName != null" >
-                user_name,
-            </if>
-            <if test="birthDay != null" >
-                birth_day,
+            <if test="username != null" >
+                username,
             </if>
             <if test="sex != null" >
                 sex,
@@ -46,11 +49,8 @@
             <if test="id != null" >
                 #{id,jdbcType=INTEGER},
             </if>
-            <if test="userName != null" >
-                #{userName,jdbcType=VARCHAR},
-            </if>
-            <if test="birthDay != null" >
-                #{birthDay,jdbcType=TIMESTAMP},
+            <if test="username != null" >
+                #{username,jdbcType=VARCHAR},
             </if>
             <if test="sex != null" >
                 #{sex,jdbcType=VARCHAR},
@@ -65,11 +65,8 @@
     <update id="update" parameterType="com.example.demo.entity.User">
         update user
         <set >
-            <if test="userName != null" >
-                user_name = #{userName,jdbcType=VARCHAR},
-            </if>
-            <if test="birthDay != null" >
-                birth_day = #{birthDay,jdbcType=TIMESTAMP},
+            <if test="username != null" >
+                username = #{username,jdbcType=VARCHAR},
             </if>
             <if test="sex != null" >
                 sex = #{sex,jdbcType=VARCHAR},
@@ -80,4 +77,10 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+    <select id="findAllUser" resultMap="BaseResultMap">
+        select u.id, u.username, u.password, u.nick_name, u.sex, u.address, a.id as aid, a.uid, a.money
+        from `user` u left join account a
+        on u.id = a.uid
+    </select>
 </mapper>

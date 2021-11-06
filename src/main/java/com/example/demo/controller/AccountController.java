@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * @author liminghao.
+ * @date 2021/10/16
+ * @time 12:02
+ */
 @RestController
 @RequestMapping("/account")
 public class AccountController {
@@ -18,7 +23,7 @@ public class AccountController {
 
     @RequestMapping("/selectAll")
     @ResponseBody
-    public List<Account> ListUser() {
+    public List<Account> listAccount() {
         return accountService.findAll();
     }
 }

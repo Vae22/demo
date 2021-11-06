@@ -1,22 +1,36 @@
 package com.example.demo.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.demo.common.Result;
 import com.example.demo.entity.User;
+import com.example.demo.mapper.UserMapper;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+import java.sql.Wrapper;
 import java.util.List;
 
+/**
+ * @author liminghao.
+ * @date 2021/10/16
+ * @time 12:02
+ */
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
-
+    @Resource
+    UserMapper userMapper;
 
     @RequestMapping(value = "getUser/{id}", method = RequestMethod.GET)
-    public User GetUser(@PathVariable int id) {
+    public User getUser(@PathVariable int id) {
         return userService.getUserInfo(id);
     }
 
@@ -32,7 +46,7 @@ public class UserController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@RequestBody User user) {
-        int result = userService.Update(user);
+        int result = userService.update(user);
         if (result >= 1) {
             return "修改成功";
         } else {
@@ -46,9 +60,9 @@ public class UserController {
         return userService.save(user);
     }
 
-    @RequestMapping("/findAll")
+    @RequestMapping("/selectAll")
     @ResponseBody
-    public List<User> ListUser() {
+    public List<User> listUser() {
         return userService.selectAll();
     }
 
@@ -57,4 +71,44 @@ public class UserController {
     public List<Integer> selectAllIds() {
         return userService.selectAllIds();
     }
+
+    /**
+     * mybatis-plus 添加用户
+     * @param user
+     * @return
+     */
+    @PostMapping
+    public Result<?> save(@RequestBody User user){
+        if (user.getPassword() == null) {
+            user.setPassword("123456");
+        }
+        userMapper.insert(user);
+        return Result.success();
+    }
+
+
+    @PutMapping
+    public Result<?> update1(@RequestBody User user){
+        userMapper.updateById(user);
+        return Result.success();
+    }
+
+    @GetMapping
+    public Result<?> findPage(@RequestParam(defaultValue = "1") Integer pageNum,
+                              @RequestParam(defaultValue = "10") Integer pageSize,
+                              @RequestParam(defaultValue = "") String search){
+        LambdaQueryWrapper<User> wrapper = Wrappers.<User>lambdaQuery();
+        if (StringUtils.isNotBlank(search)){
+            wrapper.like(User::getNickName, search);
+        }
+        Page<User> userPage = userMapper.selectPage(new Page<>(pageNum, pageSize),wrapper);
+        return Result.success(userPage);
+    }
+
+    @GetMapping("findAllUser")
+    public List<User> findAllUser() {
+       return userService.findAllUser();
+    }
+
+
 }

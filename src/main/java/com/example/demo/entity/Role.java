@@ -10,19 +10,25 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author liminghao.
+ * @date 2021/10/16
+ * @time 12:02
+ */
 @Data
-@TableName("user")
-public class User implements Serializable {
+@TableName("sys_role")
+public class Role implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer id;
-    private String username;
-    private String password;
-    private String nickName;
-    private String sex;
-    private String address;
+    private String code;
+    private String name;
+    private Date createTime;
+    private Date modeifyTime;
+    private Integer createBy;
+    private Integer modeifyBy;
 
-    // @TableField注解用于实体类中不存在的字段，如果不加该注解，则会报错。
     @TableField(exist = false)
-    private List<Account> accounts;
+    private List<User> users;
+
 
 }

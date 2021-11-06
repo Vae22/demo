@@ -1,12 +1,13 @@
 package com.example.demo.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.demo.entity.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface UserMapper {
+public interface UserMapper extends BaseMapper<User> {
     /**
      * 根据id查询用户信息
      * @param id
@@ -39,4 +40,6 @@ public interface UserMapper {
      * @return
      */
     List<User> selectAll ();
+
+    List<User> findAllUser();
 }
