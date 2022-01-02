@@ -131,4 +131,5 @@ public class UserController {
         int i = userMapper.updateById(user);
         return Result.success(i);
     }
+
 }
