@@ -3,7 +3,11 @@ package com.example.demo.service.impl;
 import com.example.demo.entity.Role;
 import com.example.demo.mapper.RoleMapper;
 import com.example.demo.service.RoleService;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -15,7 +19,6 @@ import java.util.List;
  */
 @Service
 public class RoleServiceImpl implements RoleService {
-
     @Resource
     RoleMapper roleMapper;
 
@@ -23,4 +26,5 @@ public class RoleServiceImpl implements RoleService {
     public List<Role> findAllRole() {
         return roleMapper.findAllRole();
     }
+
 }

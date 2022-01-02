@@ -19,7 +19,7 @@ public interface UserMapper extends BaseMapper<User> {
      * @param user
      * @return
      */
-    int save (User user);
+    int save1 (User user);
 
     /**
      * 更新用户信息

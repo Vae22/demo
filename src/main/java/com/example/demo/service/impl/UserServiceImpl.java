@@ -39,9 +39,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User save(User user) {
-        int save = userMapper.save(user);
-        return user;
+    public User save1(User user1) {
+        int save = userMapper.save1(user1);
+        return user1;
     }
 
     @Override
@@ -65,8 +65,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAllUser() {
-
         return userMapper.findAllUser();
     }
+
+
+//    public int insert(User user) {
+//        return userMapper.insert(user);
+//    }
 
 }

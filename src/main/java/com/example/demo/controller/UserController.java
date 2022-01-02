@@ -5,14 +5,16 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.common.Result;
+import com.example.demo.entity.Category;
 import com.example.demo.entity.User;
+import com.example.demo.mapper.CategoryMapper;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.sql.Wrapper;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +30,8 @@ public class UserController {
     private UserService userService;
     @Resource
     UserMapper userMapper;
+    @Resource
+    CategoryMapper categoryMapper;
 
     @RequestMapping(value = "getUser/{id}", method = RequestMethod.GET)
     public User getUser(@PathVariable int id) {
@@ -57,7 +61,7 @@ public class UserController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public User insert(@RequestBody User user) {
-        return userService.save(user);
+        return userService.save1(user);
     }
 
     @RequestMapping("/selectAll")
@@ -72,28 +76,8 @@ public class UserController {
         return userService.selectAllIds();
     }
 
-    /**
-     * mybatis-plus 添加用户
-     * @param user
-     * @return
-     */
-    @PostMapping
-    public Result<?> save(@RequestBody User user){
-        if (user.getPassword() == null) {
-            user.setPassword("123456");
-        }
-        userMapper.insert(user);
-        return Result.success();
-    }
 
-
-    @PutMapping
-    public Result<?> update1(@RequestBody User user){
-        userMapper.updateById(user);
-        return Result.success();
-    }
-
-    @GetMapping
+    @GetMapping("findPage")
     public Result<?> findPage(@RequestParam(defaultValue = "1") Integer pageNum,
                               @RequestParam(defaultValue = "10") Integer pageSize,
                               @RequestParam(defaultValue = "") String search){
@@ -111,4 +95,40 @@ public class UserController {
     }
 
 
+
+    @PostMapping
+    public Result<?> save(@RequestBody Category category) {
+        categoryMapper.insert(category);
+        return Result.success();
+    }
+
+    @PutMapping
+    public Result<?> update(@RequestBody Category category) {
+        categoryMapper.updateById(category);
+        return Result.success();
+    }
+
+    @DeleteMapping("/{id}")
+    public Result<?> delete(@PathVariable Integer id) {
+        categoryMapper.deleteById(id);
+        return Result.success();
+    }
+
+
+    @GetMapping("selectUser")
+    public List<User> selectUser() {
+        return userMapper.selectList(null);
+    }
+
+    @PostMapping("save")
+    public Result<?> save(@RequestBody User user) {
+        int insert = userMapper.insert(user);
+        return Result.success(insert);
+    }
+
+    @PutMapping("updateById")
+    public Result<?> updateById(@RequestBody User user) {
+        int i = userMapper.updateById(user);
+        return Result.success(i);
+    }
 }

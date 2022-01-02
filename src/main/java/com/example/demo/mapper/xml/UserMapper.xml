@@ -29,7 +29,7 @@
         select id,username,sex,address from user
     </select>
     <!--增加用户信息-->
-    <insert id="save" parameterType="com.example.demo.entity.User" >
+    <insert id="save1" parameterType="com.example.demo.entity.User" >
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >

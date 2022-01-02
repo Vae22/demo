@@ -1,12 +1,18 @@
 package com.example.demo.controller;
 
+import com.example.demo.common.Result;
 import com.example.demo.entity.Account;
+import com.example.demo.entity.Category;
+import com.example.demo.mapper.CategoryMapper;
 import com.example.demo.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,10 +26,34 @@ public class AccountController {
 
     @Autowired
     AccountService accountService;
+    @Resource
+    CategoryMapper categoryMapper;
 
     @RequestMapping("/selectAll")
     @ResponseBody
     public List<Account> listAccount() {
         return accountService.findAll();
+    }
+
+    @GetMapping
+    public Result<?> findCategory() {
+        List<Category> categories = categoryMapper.selectList(null);
+        return Result.success(loopQuery(null, categories));
+    }
+
+    public List<Category> loopQuery(Integer pid, List<Category> categories) {
+        List<Category> categoryList = new ArrayList<>();
+        for(Category category : categories) {
+            if (pid == null) {
+                if (category.getPid() == null) {
+                    categoryList.add(category);
+                    category.setChildren(loopQuery(category.getId(), categories));
+                }
+            } else if (pid.equals(category.getPid())){
+                categoryList.add(category);
+                category.setChildren(loopQuery(category.getId(), categories));
+            }
+        }
+        return categoryList;
     }
 }

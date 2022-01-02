@@ -1,10 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.common.Result;
 import com.example.demo.entity.User;
-import com.example.demo.mapper.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -21,7 +17,7 @@ public interface UserService {
 
     public int update(User user);
 
-    public User save(User user);
+    public User save1(User user);
 
     public List<User> selectAll();
 
