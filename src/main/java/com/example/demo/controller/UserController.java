@@ -114,7 +114,6 @@ public class UserController {
         return Result.success();
     }
 
-
     @GetMapping("selectUser")
     public List<User> selectUser() {
         return userMapper.selectList(null);
