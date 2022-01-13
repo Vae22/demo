@@ -95,7 +95,6 @@ public class UserController {
     }
 
 
-
     @PostMapping
     public Result<?> save(@RequestBody Category category) {
         categoryMapper.insert(category);

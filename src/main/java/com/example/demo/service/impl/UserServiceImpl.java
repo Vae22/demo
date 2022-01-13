@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
             userIdList.add(user.getId());
         }
         // 方法2
-        List<Integer> userIdList1=userList.stream().map(User::getId).collect(Collectors.toList());
+        List<Integer> userIdList1 = userList.stream().map(User::getId).collect(Collectors.toList());
         return userIdList1;
     }
 
