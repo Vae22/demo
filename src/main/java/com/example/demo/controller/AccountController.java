@@ -36,22 +36,22 @@ public class AccountController {
     }
 
     @GetMapping
-    public Result<?> findCategory() {
+    public Result<?> findChildren() {
         List<Category> categories = categoryMapper.selectList(null);
-        return Result.success(loopQuery(null, categories));
+        return Result.success(queryChildren(null, categories));
     }
 
-    public List<Category> loopQuery(Integer pid, List<Category> categories) {
+    private List<Category> queryChildren(Integer pid, List<Category> categories) {
         List<Category> categoryList = new ArrayList<>();
-        for(Category category : categories) {
+        for (Category category : categories) {
             if (pid == null) {
-                if (category.getPid() == null) {
+                if (category.getId() != null) {
                     categoryList.add(category);
-                    category.setChildren(loopQuery(category.getId(), categories));
+                    category.setChildren(queryChildren(category.getId(),categories));
                 }
-            } else if (pid.equals(category.getPid())){
+            } else if (pid.equals(category.getPid())) {
                 categoryList.add(category);
-                category.setChildren(loopQuery(category.getId(), categories));
+                category.setChildren(queryChildren(category.getId(),categories));
             }
         }
         return categoryList;
