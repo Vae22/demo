@@ -4,11 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.demo.DemoApplication;
 import com.example.demo.entity.User;
 import com.example.demo.mapper.UserMapper;
+import com.example.demo.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -18,12 +21,25 @@ import java.util.Map;
  * @date 2022/1/10
  * @time 23:35
  */
+@Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { DemoApplication.class })
 public class WrapperTest {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private UserService userService;
+
+
+    @Test
+    public void testUserService() {
+        List<User> userList = userService.selectAll();
+        for (User user : userList) {
+            System.out.println(user);
+        }
+    }
 
     @Test
     public void contextLoads() {
@@ -66,7 +82,7 @@ public class WrapperTest {
         maps.forEach(System.out::println);
     }
 
-    // 模糊查询
+    // 通过id进行排序
     @Test
     public void contextLoads5() {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
@@ -76,4 +92,25 @@ public class WrapperTest {
         List<User> users = userMapper.selectList(wrapper);
         users.forEach(System.out::println);
     }
+
+    @Test
+    public void contextLoads6() throws Exception {
+        String name = "张三";
+
+        if (StringUtils.isEmpty(name)) {
+            throw new Exception("名字不能为空");
+        }
+
+        log.info("名字为；" + name);
+    }
+
+    @Test
+    public void contextLoads7() throws Exception {
+        try {
+            int num = 10/0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

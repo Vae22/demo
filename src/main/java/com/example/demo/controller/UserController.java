@@ -28,9 +28,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    @Resource
+    @Autowired
     UserMapper userMapper;
-    @Resource
+    @Autowired
     CategoryMapper categoryMapper;
 
     @RequestMapping(value = "getUser/{id}", method = RequestMethod.GET)

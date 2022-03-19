@@ -43,15 +43,15 @@ public class AccountController {
 
     private List<Category> queryChildren(Integer pid, List<Category> categories) {
         List<Category> categoryList = new ArrayList<>();
-        for (Category category : categories) {
+        for(Category category : categories) {
             if (pid == null) {
                 if (category.getId() != null) {
                     categoryList.add(category);
-                    category.setChildren(queryChildren(category.getId(),categories));
+                    category.setChildren(queryChildren(category.getId(), categories));
                 }
             } else if (pid.equals(category.getPid())) {
                 categoryList.add(category);
-                category.setChildren(queryChildren(category.getId(),categories));
+                category.setChildren(queryChildren(category.getId(), categories));
             }
         }
         return categoryList;

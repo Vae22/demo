@@ -6,9 +6,9 @@
         <result column="code" jdbcType="VARCHAR" property="code" />
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="create_time" jdbcType="DATE" property="createTime"/>
-        <result column="modeify_time" jdbcType="DATE" property="modeifyTime" />
+        <result column="modeify_time" jdbcType="DATE" property="modifyTime" />
         <result column="create_by" jdbcType="INTEGER" property="createBy"/>
-        <result column="modeify_by" jdbcType="INTEGER" property="modeifyBy"/>
+        <result column="modeify_by" jdbcType="INTEGER" property="modifyBy"/>
         <collection property="users" ofType="com.example.demo.entity.User">
             <result column="uid" jdbcType="INTEGER" property="id" />
             <result column="username" jdbcType="VARCHAR" property="username" />

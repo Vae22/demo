@@ -23,9 +23,9 @@ public class Role implements Serializable {
     private String code;
     private String name;
     private Date createTime;
-    private Date modeifyTime;
+    private Date modifyTime;
     private Integer createBy;
-    private Integer modeifyBy;
+    private Integer modifyBy;
 
     @TableField(exist = false)
     private List<User> users;
