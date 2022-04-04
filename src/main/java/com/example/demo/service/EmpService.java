@@ -9,5 +9,4 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface EmpService extends IService<Emp> {
 
-
 }
