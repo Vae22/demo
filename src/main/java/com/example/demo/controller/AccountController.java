@@ -45,7 +45,7 @@ public class AccountController {
         List<Category> categoryList = new ArrayList<>();
         for(Category category : categories) {
             if (pid == null) {
-                if (category.getId() != null) {
+                if (category.getPid() == null) {
                     categoryList.add(category);
                     category.setChildren(queryChildren(category.getId(), categories));
                 }
