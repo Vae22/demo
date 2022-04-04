@@ -2,6 +2,7 @@ package com.example.demo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.demo.entity.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public interface UserMapper extends BaseMapper<User> {
      * @param user
      * @return
      */
-    int update (User user);
+    int update1 (User user);
 
     /**
      * 根据id删除
@@ -42,4 +43,6 @@ public interface UserMapper extends BaseMapper<User> {
     List<User> selectAll ();
 
     List<User> findAllUser();
+
+    int batchInsert(@Param("list") List<User> list);
 }

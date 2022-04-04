@@ -13,8 +13,6 @@ import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,8 +47,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@RequestBody User user) {
-        int result = userService.update(user);
+    public String update1(@RequestBody User user) {
+        int result = userService.update1(user);
         if (result >= 1) {
             return "修改成功";
         } else {

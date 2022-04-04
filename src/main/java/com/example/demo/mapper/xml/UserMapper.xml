@@ -62,7 +62,7 @@
     </insert>
 
     <!--根据id更改用户信息-->
-    <update id="update" parameterType="com.example.demo.entity.User">
+    <update id="update1" parameterType="com.example.demo.entity.User">
         update user
         <set >
             <if test="username != null" >
@@ -83,4 +83,19 @@
         from `user` u left join account a
         on u.id = a.uid
     </select>
+
+    <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+        insert into `user`
+        (username, `password`, nick_name, version, `role`, age, sex, address, avatar, account,
+        score, `no`, create_time, update_time, del)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.nickName,jdbcType=VARCHAR},
+            #{item.version,jdbcType=INTEGER}, #{item.role,jdbcType=INTEGER}, #{item.age,jdbcType=INTEGER},
+            #{item.sex,jdbcType=VARCHAR}, #{item.address,jdbcType=VARCHAR}, #{item.avatar,jdbcType=VARCHAR},
+            #{item.account,jdbcType=DECIMAL}, #{item.score,jdbcType=VARCHAR}, #{item.no,jdbcType=VARCHAR},
+            #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.del,jdbcType=INTEGER}
+            )
+        </foreach>
+    </insert>
 </mapper>

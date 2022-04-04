@@ -24,9 +24,9 @@ public class ScheduledService {
      * 00 0/5
      *
      */
-//    @Scheduled(cron = "0/5 * * * * ?")
-    public void hello() {
-        System.out.println("hello,每三秒执行一次");
-    }
+//    @Scheduled(cron = "0/3 * * * * ?")
+//    public void hello() {
+//        System.out.println("hello,每三秒执行一次");
+//    }
 
 }

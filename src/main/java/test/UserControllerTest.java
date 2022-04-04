@@ -61,7 +61,7 @@ public class UserControllerTest {
     @Test
     public void testOptimisticLocker() {
         // 1.查询用户信息
-        User user = userMapper.selectById(39);
+        User user = userMapper.selectById(9);
         // 2.修改用户信息
         user.setUsername("楚子航");
         user.setPassword("888");
@@ -138,7 +138,7 @@ public class UserControllerTest {
     @Test
     public void testDeleteByMap() {
         HashMap<String, Object> map = new HashMap<>();
-        map.put("username","z3");
+        map.put("username","路明非");
         userMapper.deleteByMap(map);
     }
 }
