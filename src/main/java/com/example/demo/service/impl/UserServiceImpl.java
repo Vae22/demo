@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.entity.User;
 import com.example.demo.mapper.UserMapper;
@@ -56,8 +57,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         List<User> userList =  userMapper.selectAll();
         // 方法1
         List<Integer> userIdList = new ArrayList<>();
-        for (User user:userList
-        ) {
+        for (User user:userList) {
             userIdList.add(user.getId());
         }
         // 方法2
@@ -67,7 +67,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public List<User> findAllUser() {
-        return userMapper.findAllUser();
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        return userMapper.selectList(queryWrapper);
     }
 
     @Override

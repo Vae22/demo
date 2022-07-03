@@ -13,7 +13,9 @@ import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.*;
 
 /**
  * @author liminghao.
@@ -111,9 +113,52 @@ public class UserController {
         return Result.success();
     }
 
+    /**
+     * 多线程测试
+     * @return
+     * @throws InterruptedException
+     * @throws ExecutionException
+     */
     @GetMapping("selectUser")
-    public List<User> selectUser() {
-        return userMapper.selectList(null);
+    public List<User> selectUser() throws InterruptedException, ExecutionException {
+        List<User> users = new ArrayList<>();
+
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        CompletionService<List<User>> cs = new ExecutorCompletionService<>(executorService);
+        for (int i = 0; i < 5; i++) {
+            Callable callable = new Callable<List<User>>() {
+                @Override
+                public List<User> call() throws Exception {
+                    System.out.println("当前线程名称:\n" + Thread.currentThread().getName());
+                    // 封装的调用接口的方法
+//                    List<User> userList = userMapper.selectList(null);
+//                    List<User> userList1 = userMapper.selectAll();
+//                    users.addAll(userList);
+//                    users.addAll(userList1);
+                    Thread.sleep(1000);
+                    System.out.println("睡眠1秒");
+                    return users;
+                }
+            };
+            cs.submit(callable);
+        }
+        List<User> list = cs.take().get();
+//        for (User o : users) {
+//            System.out.println("遍历集合中的数据:\n" + o);
+//        }
+
+//        Thread thread = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                // 封装的调用接口的方法
+//                List<User> userList = userMapper.selectList(null);
+//                List<User> userList1 = userMapper.selectAll();
+//                users.addAll(userList);
+//                users.addAll(userList1);
+//            }
+//        });
+//        executorService.submit(thread);
+        return list;
     }
 
     @PostMapping("save")
