@@ -1,4 +1,4 @@
-package com.example.demo.thread.pc;
+package com.example.demo.thread.pc.test1;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;

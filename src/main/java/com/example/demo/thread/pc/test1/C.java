@@ -1,6 +1,5 @@
-package com.example.demo.thread.pc;
+package com.example.demo.thread.pc.test1;
 
-import javax.xml.crypto.Data;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;

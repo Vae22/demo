@@ -1,6 +1,4 @@
-package com.example.demo.thread.pc;
-
-import io.swagger.models.auth.In;
+package com.example.demo.thread.pc.test1;
 
 /**
  * Synchronized版 生产者、消费者

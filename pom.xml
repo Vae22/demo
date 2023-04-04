@@ -121,7 +121,24 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.7.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.jacob/jacob -->
+        <dependency>
+            <groupId>com.jacob</groupId>
+            <artifactId>jacob</artifactId>
+            <version>1.18</version>
+        </dependency>
+        <dependency>
+            <groupId>e-iceblue</groupId>
+            <artifactId>spire.pdf.free</artifactId>
+            <version>5.1.0</version>
+        </dependency>
     </dependencies>
+    <repositories>
+        <repository>
+            <id>com.e-iceblue</id>
+            <url>https://repo.e-iceblue.cn/repository/maven-public/</url>
+        </repository>
+    </repositories>
 
     <build>
         <resources>

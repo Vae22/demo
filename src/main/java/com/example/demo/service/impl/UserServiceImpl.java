@@ -68,6 +68,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public List<User> findAllUser() {
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return userMapper.selectList(queryWrapper);
     }
 
