@@ -13,7 +13,7 @@ public interface BWMFactory {
 /**
  * 实现具体的车型的生产工厂（具体工厂）
  */
-class BWM3Factory implements BWMFactory{
+class BWM3Factory implements BWMFactory {
 
     @Override
     public BWM productBWM() {
@@ -23,7 +23,7 @@ class BWM3Factory implements BWMFactory{
     }
 }
 
-class BWM5Factory implements BWMFactory{
+class BWM5Factory implements BWMFactory {
 
     @Override
     public BWM productBWM() {
@@ -32,7 +32,7 @@ class BWM5Factory implements BWMFactory{
     }
 }
 
-class BWM7Factory implements BWMFactory{
+class BWM7Factory implements BWMFactory {
 
     @Override
     public BWM productBWM() {

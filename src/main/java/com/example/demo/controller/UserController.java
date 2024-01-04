@@ -85,7 +85,7 @@ public class UserController {
         if (StringUtils.isNotBlank(search)){
             wrapper.like(User::getNickName, search);
         }
-        Page<User> userPage = userMapper.selectPage(new Page<>(pageNum, pageSize),wrapper);
+        Page<User> userPage=  userMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
         return Result.success(userPage);
     }
 

@@ -42,16 +42,16 @@ public class StreamTest {
         // collect: 聚合，可以用于GroupBy按指定字段分类，也可以用于返回列表或者拼凑字符串
         Map<String, List<UserPo>> listMap = list.stream().filter(userPo -> userPo.getScore() != null)
                 .collect(Collectors.groupingBy(UserPo::getScore));
-        listMap.forEach((score, userPos) -> System.out.println("成绩:"+score+"人数:"+userPos.size()));
+        listMap.forEach((score, userPos) -> System.out.println("成绩:"+score+"人数:" + userPos.size()));
 
         // statistics: 统计，可以统计中位数，平均值，最大最小值
         DoubleSummaryStatistics statistics =
                 filterList.stream().mapToDouble(value -> Double.parseDouble(value.getScore()))
                         .summaryStatistics();
-        System.out.println("列表中最大的数:"+statistics.getMax());
-        System.out.println("列表中最小的数:"+statistics.getMin());
-        System.out.println("所有数之和:"+statistics.getSum());
-        System.out.println("平均数:"+statistics.getAverage());
+        System.out.println("列表中最大的数:" + statistics.getMax());
+        System.out.println("列表中最小的数:" + statistics.getMin());
+        System.out.println("所有数之和:" + statistics.getSum());
+        System.out.println("平均数:" + statistics.getAverage());
 
         QueryWrapper<UserPo> wrapper = new QueryWrapper<>();
 

@@ -57,7 +57,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         List<User> userList =  userMapper.selectAll();
         // 方法1
         List<Integer> userIdList = new ArrayList<>();
-        for (User user:userList) {
+        for (User user : userList) {
             userIdList.add(user.getId());
         }
         // 方法2

@@ -14,7 +14,7 @@ public class B {
     public static void main(String[] args) {
         Data2 data = new Data2();
 
-        new Thread(()->{
+        new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 data.increment();
             }
@@ -26,17 +26,17 @@ public class B {
             }
         },"B").start();
 
-        new Thread(()->{
-            for (int i = 0; i < 10; i++) {
-                data.increment();
-            }
-        },"C").start();
-
-        new Thread(()->{
-            for (int i = 0; i < 10; i++) {
-                data.decrement();
-            }
-        },"D").start();
+//        new Thread(()->{
+//            for (int i = 0; i < 10; i++) {
+//                data.increment();
+//            }
+//        },"C").start();
+//
+//        new Thread(()->{
+//            for (int i = 0; i < 10; i++) {
+//                data.decrement();
+//            }
+//        },"D").start();
     }
 }
 
@@ -55,7 +55,7 @@ class Data2{
                 condition.await(); // 等待
             }
             number++;
-            System.out.println(Thread.currentThread().getName()+"生产:"+number);
+            System.out.println(Thread.currentThread().getName() + "生产:" + number);
             condition.signalAll(); // 唤醒
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -72,7 +72,7 @@ class Data2{
                 condition.await(); // 等待
             }
             number--;
-            System.out.println(Thread.currentThread().getName()+"消费:"+number);
+            System.out.println(Thread.currentThread().getName() + "消费:" + number);
             condition.signalAll(); // 唤醒
         } catch (InterruptedException e) {
             e.printStackTrace();

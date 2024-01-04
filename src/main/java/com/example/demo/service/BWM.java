@@ -24,7 +24,7 @@ class BWM3i implements BWM {
 }
 
 
-class BWM5 implements BWM{
+class BWM5 implements BWM {
 
     @Override
     public void showInfo() {
@@ -32,7 +32,7 @@ class BWM5 implements BWM{
     }
 }
 
-class BWM7 implements BWM{
+class BWM7 implements BWM {
 
     @Override
     public void showInfo() {

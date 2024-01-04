@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -117,7 +118,7 @@ public class UserControllerTest {
         // 参数一：当前页，参数二：页面大小
         Page<User> page = new Page<>(2,5);
         userMapper.selectPage(page,null);
-
+        Map<Object, Object> map = new HashMap<>();
         page.getRecords().forEach(System.out::println);
         System.out.println(page.getTotal());
     }

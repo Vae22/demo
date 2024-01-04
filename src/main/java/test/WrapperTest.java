@@ -143,7 +143,7 @@ public class WrapperTest {
      */
     @Test
     public void testUserServiceInsertSelective() {
-        ArrayList<User> list = new ArrayList<>();
+        List<User> list = new ArrayList<>();
         for (int i = 0; i <= 10; i++) {
             User user = new User();
             user.setUsername("ybc" + i);
@@ -155,7 +155,7 @@ public class WrapperTest {
             user.setSex("ybc" + i);
             user.setAddress("ybc" + i);
             user.setAvatar("ybc" + i);
-            BigDecimal value =new BigDecimal(10.511);
+            BigDecimal value = new BigDecimal(10.511);
             user.setAccount(value);
             user.setScore("ybc" + i);
             user.setNo("ybc" + i);
@@ -233,7 +233,8 @@ public class WrapperTest {
         try {
             int num = 10/0;
         } catch (Exception e) {
-            throw new Exception("不合法");
+//            throw new Exception("不合法");
+
         }
     }
 

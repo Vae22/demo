@@ -49,7 +49,7 @@ public class ExecutorConfig{
         executor.setThreadNamePrefix(preFix);
 
         // 线程池对拒绝任务的处理策略
-        executor.setRejectedExecutionHandler( new ThreadPoolExecutor.AbortPolicy());
+        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.AbortPolicy());
         // 初始化
         executor.initialize();
         return executor;

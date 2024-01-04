@@ -47,11 +47,13 @@ public class AccountController {
             if (pid == null) {
                 if (category.getPid() == null) {
                     categoryList.add(category);
-                    category.setChildren(queryChildren(category.getId(), categories));
+                    List<Category> children = queryChildren(category.getId(), categories);
+                    category.setChildren(children);
                 }
             } else if (pid.equals(category.getPid())) {
                 categoryList.add(category);
-                category.setChildren(queryChildren(category.getId(), categories));
+                List<Category> children = queryChildren(category.getId(), categories);
+                category.setChildren(children);
             }
         }
         return categoryList;

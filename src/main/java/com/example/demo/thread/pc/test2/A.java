@@ -37,7 +37,7 @@ class Data{
                 this.wait(); // 等待
             }
             number++;
-            System.out.println(Thread.currentThread().getName()+"生产:"+number);
+            System.out.println(Thread.currentThread().getName() + "生产:" + number);
             this.notify(); // 唤醒
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -51,7 +51,7 @@ class Data{
                 this.wait(); // 等待
             }
             number--;
-            System.out.println(Thread.currentThread().getName()+"消费:"+number);
+            System.out.println(Thread.currentThread().getName() + "消费:" + number);
             this.notify(); // 唤醒
         } catch (InterruptedException e) {
             e.printStackTrace();

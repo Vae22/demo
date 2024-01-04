@@ -20,6 +20,6 @@
     <select id="findAll" resultMap="BaseResultMap">
             select u.id, u.username, u.sex, u.address, a.id as aid, a.uid, a.money
             from account a,`user` u
-            where a.uid =u.id;
+            where a.uid = u.id;
    </select>
 </mapper>
